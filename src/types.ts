@@ -15,30 +15,33 @@ export interface Database {
 					email: string | null;
 					id: number;
 					message: string | null;
+					name: string | null;
 				};
 				Insert: {
 					created_at?: string | null;
 					email?: string | null;
 					id?: number;
 					message?: string | null;
+					name?: string | null;
 				};
 				Update: {
 					created_at?: string | null;
 					email?: string | null;
 					id?: number;
 					message?: string | null;
+					name?: string | null;
 				};
 			};
 			smoothies: {
 				Row: {
-					description: string | null;
+					description: string;
 					id: number;
 					img_url: string;
-					ingredients: Json | null;
-					nutrition_info: Json | null;
-					recipe: string[] | null;
+					ingredients: Json;
+					nutrition_info: Json;
+					recipe: string[];
 					title: string;
-					yield: number | null;
+					yield: number;
 				};
 				Insert: {
 					description?: string | null;
@@ -53,7 +56,7 @@ export interface Database {
 				Update: {
 					description?: string | null;
 					id?: number;
-					img_url?: string;
+					img_url?: string | null;
 					ingredients?: Json | null;
 					nutrition_info?: Json | null;
 					recipe?: string[] | null;
@@ -75,3 +78,7 @@ export interface Database {
 }
 
 export type smoothie = Database['public']['Tables']['smoothies']['Row'];
+export type feedbackBody = Omit<
+	Database['public']['Tables']['feedback']['Row'],
+	'created_at' | 'id'
+>;

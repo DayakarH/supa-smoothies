@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { postFeedback } from '../queries/post-feedback';
 import { useNavigate } from 'react-router-dom';
+import { feedbackBody } from '../types';
 
 const StyledContactUsPage = styled.div`
 	.message {
@@ -57,9 +58,10 @@ const ContactUs = () => {
 
 	const handleSubmit = (evt: FormEvent) => {
 		evt.preventDefault();
-		const messageBody = {
-			email: emailRef.current?.value,
-			message: messageRef.current?.value,
+		const messageBody: feedbackBody = {
+			name: nameRef.current?.value || null,
+			email: emailRef.current?.value || null,
+			message: messageRef.current?.value || null,
 		};
 		mutate(messageBody, {
 			onSuccess: () => {
